@@ -1,10 +1,12 @@
 name: Update awesome list
 
-on: 
+on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
   schedule:
-    - cron: '00 */3 * * *'
-
+    - cron: '0 0 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,8 +15,6 @@ jobs:
       - name: Awesome generator
         uses: simonecorsi/mawesome@v2
         with:
-          template-path: "template/README.ejs"
           api-token: ${{ secrets.API_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           github-email: ${{ secrets.USER_EMAIL }}
           github-name: ${{ github.repository_owner }}
